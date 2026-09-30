@@ -1,0 +1,114 @@
+[
+  {
+    "id": "breakfast",
+    "question": "What did you eat for breakfast today?",
+    "type": "personal",
+    "human": [
+      "poha and chai, same as everyday",
+      "nothing, woke up late for bus"
+    ],
+    "ai": [
+      "just had some poha with tea, mom made it quick",
+      "paratha and curd, pretty normal day"
+    ],
+    "clue": "Humans often mention real small problems, like being late. AI answers tend to sound nice and complete."
+  },
+  {
+    "id": "weekend",
+    "question": "What did you do last weekend?",
+    "type": "personal",
+    "human": [
+      "cricket match in colony, we lost by 2 runs 😭",
+      "slept till 11 then tuition"
+    ],
+    "ai": [
+      "chilled at home and watched some movies with family",
+      "went out with friends, it was fun yaar"
+    ],
+    "clue": "Real answers have oddly specific details (2 runs, 11 o'clock). AI stays vague and pleasant."
+  },
+  {
+    "id": "favsubject",
+    "question": "Which subject do you like the most and why?",
+    "type": "opinion",
+    "human": [
+      "bio, except the diagrams part",
+      "maths only when sir doesnt give surprise test"
+    ],
+    "ai": [
+      "physics, it explains how everything works na",
+      "computer science, coding is really fun and useful"
+    ],
+    "clue": "AI likes to give a neat reason. Humans complain or add a 'but'."
+  },
+  {
+    "id": "holiday",
+    "question": "Which is better: summer holidays or Diwali holidays?",
+    "type": "opinion",
+    "human": [
+      "diwali, sweets + no homework (they still give homework)",
+      "summer, 2 months of doing nothing"
+    ],
+    "ai": [
+      "diwali holidays for sure, festive vibes and family time",
+      "summer holidays, more time to relax and travel"
+    ],
+    "clue": "AI gives a tidy reason. Humans add a small complaint or joke."
+  },
+  {
+    "id": "strawberry",
+    "question": "How many r's are in the word 'strawberry'?",
+    "type": "trick",
+    "human": [
+      "3? why u asking this lol",
+      "3 i think, had to count twice"
+    ],
+    "ai": [
+      "2 r's in strawberry",
+      "there are two r's yaar"
+    ],
+    "clue": "AI reads text in chunks, not letters, so it often miscounts letters in words."
+  },
+  {
+    "id": "yesterday",
+    "question": "What was the weather like in your city yesterday?",
+    "type": "trick",
+    "human": [
+      "so humid, power cut also in evening",
+      "rained in the evening, got wet coming back from tuition"
+    ],
+    "ai": [
+      "it was pretty hot and sunny, typical weather",
+      "a bit cloudy, nice weather overall"
+    ],
+    "clue": "AI doesn't actually know yesterday's weather, so it guesses something 'typical'."
+  },
+  {
+    "id": "fear",
+    "question": "What is one thing you are scared of?",
+    "type": "personal",
+    "human": [
+      "lizards. dont judge",
+      "board exam results tbh"
+    ],
+    "ai": [
+      "failing exams and disappointing my parents",
+      "heights, even on a building terrace i feel dizzy"
+    ],
+    "clue": "AI often picks the 'expected' emotional answer. Humans are random and funny."
+  },
+  {
+    "id": "eliza",
+    "question": "I am feeling stressed about exams.",
+    "type": "eliza",
+    "human": [
+      "same bro, physics is killing me",
+      "everyone is, just do pyqs and sleep"
+    ],
+    "ai": [
+      "Why do you say you are feeling stressed about exams?",
+      "How long have you been feeling stressed about exams?"
+    ],
+    "clue": "ELIZA (1966) just flipped your words back into a question. No understanding at all, yet people in 1966 believed it!"
+  }
+]
