@@ -32,7 +32,8 @@ npm run dev
 | `npm run typecheck` | TypeScript check (`tsc -b`) |
 | `npm run preview` | Serve the built `dist/` locally |
 | `npm run lint` | ESLint |
-| `npm run check` | Typecheck and lint |
+| `npm test` | Unit tests (Vitest): shuffle and question data |
+| `npm run check` | Typecheck, lint and tests |
 | `npm run deploy` | Checks, builds and uploads to the VPS |
 | `npm run deploy:dry` | Same, but only previews the upload |
 
