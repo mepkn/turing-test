@@ -5,6 +5,10 @@ import { pick, shuffle } from './utils/shuffle.ts'
 import StartScreen from './components/StartScreen.tsx'
 import AnswerCard from './components/AnswerCard.tsx'
 import ResultScreen from './components/ResultScreen.tsx'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { bigButton } from '@/lib/styles'
 import type { Question, Result, Round } from './types.ts'
 
 const questions = rawQuestions as Question[]
@@ -99,18 +103,18 @@ export default function App() {
             transition={{ duration: 0.3 }}
           >
             <div className="mb-3 flex flex-wrap items-center gap-3">
-              <span className="text-lg font-semibold text-slate-500">
+              <span className="text-lg font-semibold text-muted-foreground">
                 Round {index + 1} of {rounds.length}
               </span>
               {isBonus && (
-                <span className="rounded-full bg-amber-100 px-4 py-1 text-lg font-bold text-amber-800">
+                <Badge className="h-auto bg-amber-100 px-4 py-1 text-lg font-bold text-amber-800">
                   Bonus round: AI from 1966
-                </span>
+                </Badge>
               )}
             </div>
             <h2 className="mb-6 text-[28px] font-bold leading-tight sm:text-4xl">{round.question.question}</h2>
 
-            <p className="mb-3 text-xl font-semibold text-slate-800">
+            <p className="mb-3 text-xl font-semibold text-foreground">
               {revealed ? '' : 'Tap the answer you think is AI:'}
             </p>
             <div className="grid gap-5 md:grid-cols-2">
@@ -129,23 +133,16 @@ export default function App() {
             </div>
 
             {revealed && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6 rounded-2xl border-2 border-slate-200 bg-white p-6"
-              >
-                <p className="mb-2 text-3xl font-bold">
-                  {lastResult.correct ? '✅ Correct! You found the AI.' : '❌ Wrong — that one was human.'}
-                </p>
-                <p className="mb-5 text-xl text-slate-700">💡 {round.question.clue}</p>
-                <button
-                  autoFocus
-                  onClick={() => dispatch({ type: 'next' })}
-                  className="rounded-2xl bg-indigo-600 px-10 py-4 text-2xl font-bold text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300"
-                >
-                  {index + 1 >= rounds.length ? 'See results' : 'Next'} →
-                </button>
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+                <Card className="mt-6 gap-0 rounded-2xl p-6 text-base">
+                  <p className="mb-2 text-3xl font-bold">
+                    {lastResult.correct ? '✅ Correct! You found the AI.' : '❌ Wrong — that one was human.'}
+                  </p>
+                  <p className="mb-5 text-xl text-muted-foreground">💡 {round.question.clue}</p>
+                  <Button autoFocus onClick={() => dispatch({ type: 'next' })} className={`w-fit px-10 ${bigButton}`}>
+                    {index + 1 >= rounds.length ? 'See results' : 'Next'} →
+                  </Button>
+                </Card>
               </motion.div>
             )}
           </motion.div>

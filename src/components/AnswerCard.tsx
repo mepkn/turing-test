@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Badge } from '@/components/ui/badge'
 
 // Both faces render identical text styles so formatting never gives a clue.
 type Props = {
@@ -36,7 +37,7 @@ export default function AnswerCard({ letter, text, isAI, revealed, picked, onPic
       >
         {/* Front */}
         <div
-          className={`${face} border-slate-200 bg-white shadow-md transition group-hover:border-indigo-400 group-focus-visible:border-indigo-500`}
+          className={`${face} border-slate-200 bg-white shadow-md transition group-hover:border-primary/60 group-focus-visible:border-primary`}
         >
           <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-2xl font-bold text-white">
             {letter}
@@ -49,11 +50,9 @@ export default function AnswerCard({ letter, text, isAI, revealed, picked, onPic
             <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-2xl font-bold text-white">
               {letter}
             </span>
-            <span
-              className={`rounded-full px-4 py-1 text-xl font-bold text-white ${isAI ? 'bg-indigo-600' : 'bg-slate-600'}`}
-            >
+            <Badge className={`h-auto px-4 py-1 text-xl font-bold text-white ${isAI ? 'bg-primary' : 'bg-slate-600'}`}>
               {isAI ? '🤖 AI' : '🧑 Human'}
-            </span>
+            </Badge>
             {picked && (
               <span className={`ml-auto text-lg font-semibold ${isAI ? 'text-emerald-700' : 'text-rose-700'}`}>
                 Your pick {isAI ? '✅' : '❌'}

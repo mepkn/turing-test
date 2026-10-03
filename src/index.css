@@ -1,5 +1,65 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-heading: var(--font-sans);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --radius: 1rem;
+    --background: oklch(0.984 0.003 248);
+    --foreground: oklch(0.208 0.04 266);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.208 0.04 266);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.208 0.04 266);
+    --primary: oklch(0.51 0.23 277);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.968 0.007 248);
+    --secondary-foreground: oklch(0.208 0.04 266);
+    --muted: oklch(0.968 0.007 248);
+    --muted-foreground: oklch(0.554 0.04 257);
+    --accent: oklch(0.962 0.018 272);
+    --accent-foreground: oklch(0.36 0.15 277);
+    --destructive: oklch(0.586 0.22 17);
+    --border: oklch(0.929 0.013 255);
+    --input: oklch(0.869 0.02 253);
+    --ring: oklch(0.585 0.2 277);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground font-sans; }
+}
 
 html { font-size: 18px; }
-body { background: #f8fafc; color: #0f172a; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 @media (min-width: 1024px) { html { font-size: 20px; } }

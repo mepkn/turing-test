@@ -1,5 +1,8 @@
 import { useEffect } from 'react'
 import confetti from 'canvas-confetti'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { bigButton } from '@/lib/styles'
 import type { Result, Round } from '../types.ts'
 
 function verdict(score: number, total: number): string {
@@ -26,7 +29,7 @@ export default function ResultScreen({ rounds, results, onRestart }: Props) {
         <h1 className="mb-3 text-4xl font-extrabold sm:text-5xl">
           You found the AI in {score} of {total} rounds
         </h1>
-        <p className="text-2xl font-semibold text-indigo-700">{verdict(score, total)}</p>
+        <p className="text-2xl font-semibold text-primary">{verdict(score, total)}</p>
       </section>
 
       {wrong.length > 0 && (
@@ -34,7 +37,7 @@ export default function ResultScreen({ rounds, results, onRestart }: Props) {
           <h2 className="mb-4 text-2xl font-bold">Rounds you missed</h2>
           <div className="space-y-5">
             {wrong.map((r) => (
-              <div key={r.question.id} className="rounded-2xl border-2 border-slate-200 bg-white p-5">
+              <Card key={r.question.id} className="gap-0 rounded-2xl p-5 text-base">
                 <p className="mb-3 text-xl font-semibold">{r.question.question}</p>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {r.options.map((o, i) => (
@@ -50,21 +53,17 @@ export default function ResultScreen({ rounds, results, onRestart }: Props) {
                     </div>
                   ))}
                 </div>
-                <p className="mt-3 text-lg text-slate-600">💡 {r.question.clue}</p>
-              </div>
+                <p className="mt-3 text-lg text-muted-foreground">💡 {r.question.clue}</p>
+              </Card>
             ))}
           </div>
         </section>
       )}
 
       <div className="text-center">
-        <button
-          onClick={onRestart}
-          autoFocus
-          className="rounded-2xl bg-indigo-600 px-12 py-4 text-2xl font-bold text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300"
-        >
+        <Button onClick={onRestart} autoFocus className={`px-12 ${bigButton}`}>
           Play again
-        </button>
+        </Button>
       </div>
     </div>
   )

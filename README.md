@@ -14,7 +14,7 @@ Live: https://turing-test.pknspace.com
 
 ## Stack
 
-React 19 · TypeScript · Vite · Tailwind CSS v4 · Framer Motion. No backend.
+React 19 · TypeScript · Vite · Tailwind CSS v4 · shadcn/ui · Framer Motion · Vitest. No backend.
 
 ## Development
 
