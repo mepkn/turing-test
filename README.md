@@ -18,6 +18,8 @@ React 19 · TypeScript · Vite · Tailwind CSS v4 · shadcn/ui · Framer Motion 
 
 ## Development
 
+Requires Node 22.18+ (`.nvmrc` pins 22).
+
 ```bash
 npm install
 npm run dev
@@ -57,3 +59,4 @@ Caddy serves it directly (no restart needed).
 - Each round picks one human and one AI answer and shuffles their order
   (`src/utils/shuffle.ts`).
 - The game is a small reducer state machine: start → playing → revealed → … → finished.
+- **UI.** shadcn/ui components live in `src/components/ui/` (vendored, added with `npx shadcn add`, not linted). The theme tokens in `src/index.css` give them the indigo look. The answer cards' flip is custom; `src/lib/styles.ts` holds the large classroom button style.
