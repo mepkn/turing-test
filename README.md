@@ -1,75 +1,57 @@
-# React + TypeScript + Vite
+# Turing Test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Can you spot the AI? Over 8 rounds you read two answers to the same question, one
+written by a person and one by AI, and pick the AI.
 
-Currently, two official plugins are available:
+Live: https://turing-test.pknspace.com
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 8 rounds with a shuffled question order, ending with a bonus round about ELIZA.
+- After each pick, the answer is revealed with a clue on how to tell them apart.
+- A final score screen with confetti.
+- Keyboard shortcuts for picking and moving to the next round.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+React 19 · Vite · Tailwind CSS v4 · Framer Motion. No backend.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Development
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Command | What it does |
+|---|---|
+| `npm run dev` | Dev server at http://localhost:5173 |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the built `dist/` locally |
+| `npm run lint` | ESLint |
+| `npm run check` | Lint |
+| `npm run deploy` | Checks, builds and uploads to the VPS |
+| `npm run deploy:dry` | Same, but only previews the upload |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Deployment
 
-```
+The site is static: `npm run build` writes `dist/`, which is synced to a VPS where
+Caddy serves it directly (no restart needed).
+
+1. One-time setup: copy `.env.example` to `.env.prod.local` (git-ignored) and fill in
+   `DEPLOY_HOST`, `DEPLOY_PORT` and `DEPLOY_DIR`. You also need SSH key access to the server.
+2. Deploy:
+   ```bash
+   npm run deploy:dry   # preview what would change
+   npm run deploy       # checks, build, upload
+   ```
+
+## How it works
+
+- Questions live in `src/data/turing.json`. Each one has a prompt, human answers, AI
+  answers and a `clue`. The `type: "eliza"` question is always the last round.
+- Each round picks one human and one AI answer and shuffles their order
+  (`src/utils/shuffle.js`).
+- The game is a small reducer state machine: start → playing → revealed → … → finished.

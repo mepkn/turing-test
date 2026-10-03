@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "./deploy.sh"
+    "check": "npm run lint",
+    "deploy": "scripts/deploy.sh",
+    "deploy:dry": "DRY_RUN=1 scripts/deploy.sh"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
