@@ -1,4 +1,4 @@
-export default function StartScreen({ onStart }) {
+export default function StartScreen({ onStart }: { onStart: () => void }) {
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center text-center">
       <p className="mb-3 text-lg font-semibold uppercase tracking-widest text-indigo-600">Turing Test · 1950</p>

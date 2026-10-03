@@ -14,7 +14,7 @@ Live: https://turing-test.pknspace.com
 
 ## Stack
 
-React 19 · Vite · Tailwind CSS v4 · Framer Motion. No backend.
+React 19 · TypeScript · Vite · Tailwind CSS v4 · Framer Motion. No backend.
 
 ## Development
 
@@ -28,10 +28,11 @@ npm run dev
 | Command | What it does |
 |---|---|
 | `npm run dev` | Dev server at http://localhost:5173 |
-| `npm run build` | Production build into `dist/` |
+| `npm run build` | Typecheck and production build into `dist/` |
+| `npm run typecheck` | TypeScript check (`tsc -b`) |
 | `npm run preview` | Serve the built `dist/` locally |
 | `npm run lint` | ESLint |
-| `npm run check` | Lint |
+| `npm run check` | Typecheck and lint |
 | `npm run deploy` | Checks, builds and uploads to the VPS |
 | `npm run deploy:dry` | Same, but only previews the upload |
 
@@ -53,5 +54,5 @@ Caddy serves it directly (no restart needed).
 - Questions live in `src/data/turing.json`. Each one has a prompt, human answers, AI
   answers and a `clue`. The `type: "eliza"` question is always the last round.
 - Each round picks one human and one AI answer and shuffles their order
-  (`src/utils/shuffle.js`).
+  (`src/utils/shuffle.ts`).
 - The game is a small reducer state machine: start → playing → revealed → … → finished.

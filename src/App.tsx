@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useReducer } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import questions from './data/turing.json'
-import { pick, shuffle } from './utils/shuffle.js'
-import StartScreen from './components/StartScreen.jsx'
-import AnswerCard from './components/AnswerCard.jsx'
-import ResultScreen from './components/ResultScreen.jsx'
+import rawQuestions from './data/turing.json'
+import { pick, shuffle } from './utils/shuffle.ts'
+import StartScreen from './components/StartScreen.tsx'
+import AnswerCard from './components/AnswerCard.tsx'
+import ResultScreen from './components/ResultScreen.tsx'
+import type { Question, Result, Round } from './types.ts'
+
+const questions = rawQuestions as Question[]
 
 const NUM_ROUNDS = 8
 
-function buildRounds() {
+function buildRounds(): Round[] {
   const eliza = questions.find((q) => q.type === 'eliza')
   const regular = shuffle(questions.filter((q) => q.type !== 'eliza'))
   const chosen = eliza ? [...regular.slice(0, NUM_ROUNDS - 1), eliza] : regular.slice(0, NUM_ROUNDS)
@@ -21,9 +24,18 @@ function buildRounds() {
   }))
 }
 
-const initialState = { phase: 'start', rounds: [], index: 0, results: [], picked: null }
+type State = {
+  phase: 'start' | 'playing' | 'revealed' | 'finished'
+  rounds: Round[]
+  index: number
+  results: Result[]
+  picked: number | null
+}
+type Action = { type: 'start' } | { type: 'pick'; choice: number } | { type: 'next' }
 
-function reducer(state, action) {
+const initialState: State = { phase: 'start', rounds: [], index: 0, results: [], picked: null }
+
+function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'start':
       return { ...initialState, phase: 'playing', rounds: buildRounds() }
@@ -52,7 +64,7 @@ export default function App() {
   const round = rounds[index]
 
   const onKey = useCallback(
-    (e) => {
+    (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const k = e.key.toLowerCase()
       if (phase === 'playing' && (k === 'a' || k === 'b')) dispatch({ type: 'pick', choice: k === 'a' ? 0 : 1 })

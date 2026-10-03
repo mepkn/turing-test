@@ -1,7 +1,17 @@
 import { motion } from 'framer-motion'
 
 // Both faces render identical text styles so formatting never gives a clue.
-export default function AnswerCard({ letter, text, isAI, revealed, picked, onPick, disabled }) {
+type Props = {
+  letter: string
+  text: string
+  isAI: boolean
+  revealed: boolean
+  picked: boolean
+  onPick: () => void
+  disabled: boolean
+}
+
+export default function AnswerCard({ letter, text, isAI, revealed, picked, onPick, disabled }: Props) {
   const face =
     'absolute inset-0 flex flex-col rounded-3xl border-4 p-6 sm:p-8 [backface-visibility:hidden]'
   // Colour reflects whether the student's pick was right, not Human vs AI.

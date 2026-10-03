@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check": "npm run lint",
+    "check": "npm run typecheck && npm run lint",
     "deploy": "scripts/deploy.sh",
-    "deploy:dry": "DRY_RUN=1 scripts/deploy.sh"
+    "deploy:dry": "DRY_RUN=1 scripts/deploy.sh",
+    "typecheck": "tsc -b"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
@@ -35,6 +37,6 @@
     "vite": "^8.3.0"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   }
 }

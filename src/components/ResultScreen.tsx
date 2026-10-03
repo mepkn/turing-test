@@ -1,14 +1,17 @@
 import { useEffect } from 'react'
 import confetti from 'canvas-confetti'
+import type { Result, Round } from '../types.ts'
 
-function verdict(score, total) {
+function verdict(score: number, total: number): string {
   const pct = score / total
   if (pct <= 3 / 8) return 'The AI fooled you!'
   if (pct <= 5 / 8) return "That's close to guessing. Turing would say the AI passed."
   return 'Sharp eyes!'
 }
 
-export default function ResultScreen({ rounds, results, onRestart }) {
+type Props = { rounds: Round[]; results: Result[]; onRestart: () => void }
+
+export default function ResultScreen({ rounds, results, onRestart }: Props) {
   const total = rounds.length
   const score = results.filter((r) => r.correct).length
   const wrong = rounds.map((r, i) => ({ ...r, result: results[i] })).filter((r) => !r.result.correct)
